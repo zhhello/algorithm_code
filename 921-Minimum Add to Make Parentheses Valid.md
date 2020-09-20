@@ -29,7 +29,8 @@ class Solution {
 public:
     int minAddToMakeValid(string S) {
         // 以左括号为基准
-        int left_need = 0, right_need = 0;
+        int left_need = 0;
+	int right_need = 0;
         for(char c : S) {
             if(c == '(')
                 right_need++;
