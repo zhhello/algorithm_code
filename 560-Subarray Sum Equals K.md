@@ -43,8 +43,47 @@ public:
 ```
 
 ## 解法2
-利用前缀和思路
-且采用哈希列表优化了时间耗时
+未经优化的前缀和，时间复杂度仍然为O(N^2)
+
+```
+class Solution {
+public:
+    int subarraySum(vector<int>& nums, int k) {
+        // 按照前缀和思路解决
+        if(nums.size() == 0)
+            return 0;
+
+        vector<int> pre_sum; // 前缀和
+        int res = 0;
+        for(int val : nums) {
+            res += val;
+            pre_sum.push_back(res);
+        }
+
+        res = 0;
+        for(int i = 0; i < nums.size(); i++) {
+            if(pre_sum[i] == k)
+                res++;
+                
+            for(int j = i + 1; j < nums.size(); j++) {
+                if(pre_sum[j] - pre_sum[i] == k)
+                    res++;
+            }
+        }
+
+        return res;
+    }
+};
+```
+
+## 解法3
+经过优化的前缀和算法，
+利用前缀和思路， 且采用哈希列表优化了时间耗时
+
+
+时间复杂度：O(N)
+
+空间复杂度：O(N)
 
 ```
 class Solution {
